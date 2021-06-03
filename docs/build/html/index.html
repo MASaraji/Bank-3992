@@ -1,0 +1,535 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Welcome to bank-3992’s documentation! &#8212; bank-3992 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="DS" href="DS.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="DS.html" title="DS"
+             accesskey="N">next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">bank-3992 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Welcome to bank-3992’s documentation!</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="welcome-to-bank-3992-s-documentation">
+<h1>Welcome to bank-3992’s documentation!<a class="headerlink" href="#welcome-to-bank-3992-s-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DS.html">DS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="DS.html#id1">توضیحاتی در مورد بخش دی اس</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-DSModels">
+<span id="ds-models"></span><h1>DS models<a class="headerlink" href="#module-DSModels" title="Permalink to this headline">¶</a></h1>
+<p>collection on all modelsnused in DS.py include
+User =&gt; a parent class for Employee,Customer
+Manager =&gt; this class is same as Employee class and
+its parent class in Employee
+Employee =&gt; parent class for Manager</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="DSModels.Account">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">DSModels.</span></span><span class="sig-name descname"><span class="pre">Account</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">balance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">integer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">owner</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">integer</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DSModels.html#Account"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DSModels.Account" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DSModels.Account.account_number">
+<span class="sig-name descname"><span class="pre">account_number</span></span><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#DSModels.Account.account_number" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DSModels.Account.balance">
+<span class="sig-name descname"><span class="pre">balance</span></span><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#DSModels.Account.balance" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DSModels.Account.deposit">
+<span class="sig-name descname"><span class="pre">deposit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">amount=integer</span></em>, <em class="sig-param"><span class="pre">history=if</span> <span class="pre">True</span> <span class="pre">add</span> <span class="pre">to</span> <span class="pre">history</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DSModels.html#Account.deposit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DSModels.Account.deposit" title="Permalink to this definition">¶</a></dt>
+<dd><p>return 7 if amount is smaller or equal to 0</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DSModels.Account.fund_transfer">
+<span class="sig-name descname"><span class="pre">fund_transfer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">amount</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account_num</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">types</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DSModels.html#Account.fund_transfer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DSModels.Account.fund_transfer" title="Permalink to this definition">¶</a></dt>
+<dd><p>fund_transfer(amount=integer,
+account_num=sender or receiver account number ,
+types=choose transfer_withdraw if you send money
+else choose transfer_deposit))
+return 1 if amount bigger than balance
+return 7 if amount is bigger or equal to 0</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DSModels.Account.get_history">
+<span class="sig-name descname"><span class="pre">get_history</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DSModels.html#Account.get_history"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DSModels.Account.get_history" title="Permalink to this definition">¶</a></dt>
+<dd><p>return all history if types None else return specific history</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DSModels.Account.owner">
+<span class="sig-name descname"><span class="pre">owner</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#DSModels.Account.owner" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DSModels.Account.show_balance">
+<span class="sig-name descname"><span class="pre">show_balance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="reference internal" href="_modules/DSModels.html#Account.show_balance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DSModels.Account.show_balance" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DSModels.Account.withdraw">
+<span class="sig-name descname"><span class="pre">withdraw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">amount=integer</span></em>, <em class="sig-param"><span class="pre">history=if</span> <span class="pre">True</span> <span class="pre">add</span> <span class="pre">to</span> <span class="pre">history</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DSModels.html#Account.withdraw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DSModels.Account.withdraw" title="Permalink to this definition">¶</a></dt>
+<dd><p>return 1 if amount bigger than balance
+return 7 if amount is bigger or equal to 0</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="DSModels.Admin">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">DSModels.</span></span><span class="sig-name descname"><span class="pre">Admin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DSModels.html#Admin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DSModels.Admin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DSModels.Admin.password">
+<span class="sig-name descname"><span class="pre">password</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#DSModels.Admin.password" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DSModels.Admin.username">
+<span class="sig-name descname"><span class="pre">username</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#DSModels.Admin.username" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="DSModels.Branch">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">DSModels.</span></span><span class="sig-name descname"><span class="pre">Branch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DSModels.html#Branch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DSModels.Branch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DSModels.Branch.address">
+<span class="sig-name descname"><span class="pre">address</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#DSModels.Branch.address" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DSModels.Branch.employees">
+<span class="sig-name descname"><span class="pre">employees</span></span><em class="property"><span class="pre">:</span> <span class="pre">list</span></em><a class="headerlink" href="#DSModels.Branch.employees" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DSModels.Branch.manager">
+<span class="sig-name descname"><span class="pre">manager</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">''</span></em><a class="headerlink" href="#DSModels.Branch.manager" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DSModels.Branch.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#DSModels.Branch.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="DSModels.Customer">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">DSModels.</span></span><span class="sig-name descname"><span class="pre">Customer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">first_name:</span> <span class="pre">str</span></em>, <em class="sig-param"><span class="pre">last_name:</span> <span class="pre">str</span></em>, <em class="sig-param"><span class="pre">username:</span> <span class="pre">str</span></em>, <em class="sig-param"><span class="pre">password:</span> <span class="pre">str</span></em>, <em class="sig-param"><span class="pre">ID:</span> <span class="pre">str</span></em>, <em class="sig-param"><span class="pre">address:</span> <span class="pre">str</span></em>, <em class="sig-param"><span class="pre">accounts:</span> <span class="pre">list</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DSModels.html#Customer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DSModels.Customer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#DSModels.User" title="DSModels.User"><code class="xref py py-class docutils literal notranslate"><span class="pre">DSModels.User</span></code></a></p>
+<p>Customer(first_name=string ,last_name=string,username=string,
+password=string,ID=string,address=string)</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DSModels.Customer.accounts">
+<span class="sig-name descname"><span class="pre">accounts</span></span><em class="property"><span class="pre">:</span> <span class="pre">list</span></em><a class="headerlink" href="#DSModels.Customer.accounts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DSModels.Customer.add_account">
+<span class="sig-name descname"><span class="pre">add_account</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">account_num</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DSModels.html#Customer.add_account"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DSModels.Customer.add_account" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DSModels.Customer.get_history">
+<span class="sig-name descname"><span class="pre">get_history</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DSModels.html#Customer.get_history"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DSModels.Customer.get_history" title="Permalink to this definition">¶</a></dt>
+<dd><p>yield all history if types is None else yield specific history</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="DSModels.Employee">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">DSModels.</span></span><span class="sig-name descname"><span class="pre">Employee</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">first_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ID</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">salary</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">branch</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DSModels.html#Employee"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DSModels.Employee" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#DSModels.User" title="DSModels.User"><code class="xref py py-class docutils literal notranslate"><span class="pre">DSModels.User</span></code></a></p>
+<p>Employee(first_name:string ,last_name:string,username:string,
+password:string,ID:string,address:string,salary:integer,branch=’’)</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DSModels.Employee.branch">
+<span class="sig-name descname"><span class="pre">branch</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">''</span></em><a class="headerlink" href="#DSModels.Employee.branch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DSModels.Employee.salary">
+<span class="sig-name descname"><span class="pre">salary</span></span><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#DSModels.Employee.salary" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="DSModels.Manager">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">DSModels.</span></span><span class="sig-name descname"><span class="pre">Manager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">first_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ID</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">salary</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">branch</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DSModels.html#Manager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DSModels.Manager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#DSModels.Employee" title="DSModels.Employee"><code class="xref py py-class docutils literal notranslate"><span class="pre">DSModels.Employee</span></code></a></p>
+<p>Manager(first_name=string ,last_name:string,username=string,
+password=string,ID=string,address=string,salary=integer,branch=’’)</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DSModels.Manager.ID">
+<span class="sig-name descname"><span class="pre">ID</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#DSModels.Manager.ID" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DSModels.Manager.address">
+<span class="sig-name descname"><span class="pre">address</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#DSModels.Manager.address" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DSModels.Manager.first_name">
+<span class="sig-name descname"><span class="pre">first_name</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#DSModels.Manager.first_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DSModels.Manager.last_name">
+<span class="sig-name descname"><span class="pre">last_name</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#DSModels.Manager.last_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DSModels.Manager.password">
+<span class="sig-name descname"><span class="pre">password</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#DSModels.Manager.password" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DSModels.Manager.salary">
+<span class="sig-name descname"><span class="pre">salary</span></span><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#DSModels.Manager.salary" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DSModels.Manager.username">
+<span class="sig-name descname"><span class="pre">username</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#DSModels.Manager.username" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="DSModels.User">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">DSModels.</span></span><span class="sig-name descname"><span class="pre">User</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">first_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ID</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DSModels.html#User"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DSModels.User" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>parent class for Manager, Employee and Customer</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DSModels.User.ID">
+<span class="sig-name descname"><span class="pre">ID</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#DSModels.User.ID" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DSModels.User.address">
+<span class="sig-name descname"><span class="pre">address</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#DSModels.User.address" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DSModels.User.first_name">
+<span class="sig-name descname"><span class="pre">first_name</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#DSModels.User.first_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DSModels.User.last_name">
+<span class="sig-name descname"><span class="pre">last_name</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#DSModels.User.last_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DSModels.User.password">
+<span class="sig-name descname"><span class="pre">password</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#DSModels.User.password" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DSModels.User.username">
+<span class="sig-name descname"><span class="pre">username</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#DSModels.User.username" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-DS">
+<span id="ds-core"></span><h1>DS Core<a class="headerlink" href="#module-DS" title="Permalink to this headline">¶</a></h1>
+<p>in This Module we define an api for the main.py
+methods in Core object must be able to do anything we need the backend do
+other classes, functions or constants can be defined for internal use.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="DS.Core">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">DS.</span></span><span class="sig-name descname"><span class="pre">Core</span></span><a class="reference internal" href="_modules/DS.html#Core"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DS.Core" title="Permalink to this definition">¶</a></dt>
+<dd><p>Core part of DS</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="DS.Core.account_history">
+<span class="sig-name descname"><span class="pre">account_history</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">account_num</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DS.html#Core.account_history"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DS.Core.account_history" title="Permalink to this definition">¶</a></dt>
+<dd><p>transfer_history(account_number=integer,types=(withdraw,deposit,fund_transfer))
+return all history if not specified else return specified history</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DS.Core.add_branch_employee">
+<span class="sig-name descname"><span class="pre">add_branch_employee</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">branch_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DS.html#Core.add_branch_employee"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DS.Core.add_branch_employee" title="Permalink to this definition">¶</a></dt>
+<dd><p>add_branch_employee(branch_name=string,
+username=must be in users[employees])</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DS.Core.all_accounts">
+<span class="sig-name descname"><span class="pre">all_accounts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DS.html#Core.all_accounts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DS.Core.all_accounts" title="Permalink to this definition">¶</a></dt>
+<dd><p>return accounts obj</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DS.Core.change_password">
+<span class="sig-name descname"><span class="pre">change_password</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old_password</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_password</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">types</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DS.html#Core.change_password"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DS.Core.change_password" title="Permalink to this definition">¶</a></dt>
+<dd><p>change_password(username=string,old_paasword=string,new_password=str,
+types=(customers,employees,managers,admin))
+return 5 if password is wrong</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DS.Core.change_username">
+<span class="sig-name descname"><span class="pre">change_username</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">old_username</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_username</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">types</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DS.html#Core.change_username"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DS.Core.change_username" title="Permalink to this definition">¶</a></dt>
+<dd><p>change_username(old_username=string,new_username=string,
+types=(customers,branches,employees,managers,admin))
+return 4 if username already exists
+return 3 if There is no such a username</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DS.Core.check_login">
+<span class="sig-name descname"><span class="pre">check_login</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">types</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DS.html#Core.check_login"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DS.Core.check_login" title="Permalink to this definition">¶</a></dt>
+<dd><p>check_login(username=string,password=string,
+type=(customers,empolyees,managers,admin))
+return object if exists
+else return 3 (There is no such a username)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DS.Core.create_account">
+<span class="sig-name descname"><span class="pre">create_account</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DS.html#Core.create_account"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DS.Core.create_account" title="Permalink to this definition">¶</a></dt>
+<dd><p>create_account(self,username=string and must be in users[customers],
+amount=default 0)
+get username and return integer(account_number)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DS.Core.create_branch">
+<span class="sig-name descname"><span class="pre">create_branch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DS.html#Core.create_branch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DS.Core.create_branch" title="Permalink to this definition">¶</a></dt>
+<dd><p>return 4 if username already exists
+else return object</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DS.Core.create_customer">
+<span class="sig-name descname"><span class="pre">create_customer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">first_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ID</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DS.html#Core.create_customer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DS.Core.create_customer" title="Permalink to this definition">¶</a></dt>
+<dd><p>return 4 if username exists
+else return object</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DS.Core.create_employee">
+<span class="sig-name descname"><span class="pre">create_employee</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">first_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ID</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">salary</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DS.html#Core.create_employee"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DS.Core.create_employee" title="Permalink to this definition">¶</a></dt>
+<dd><p>return 4 if username already exists
+else return employee obj</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DS.Core.create_manager">
+<span class="sig-name descname"><span class="pre">create_manager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">first_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ID</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">salary</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DS.html#Core.create_manager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DS.Core.create_manager" title="Permalink to this definition">¶</a></dt>
+<dd><p>return object if already not exists
+else return 4(username already exists)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DS.Core.customer_history">
+<span class="sig-name descname"><span class="pre">customer_history</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DS.html#Core.customer_history"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DS.Core.customer_history" title="Permalink to this definition">¶</a></dt>
+<dd><p>return histoy if username exists
+else 3 (there is no such a user name )</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DS.Core.del_branch_employee">
+<span class="sig-name descname"><span class="pre">del_branch_employee</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">branch_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DS.html#Core.del_branch_employee"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DS.Core.del_branch_employee" title="Permalink to this definition">¶</a></dt>
+<dd><p>return 6 if there is no such a branch
+return 3 if there is no such a username</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DS.Core.del_employee">
+<span class="sig-name descname"><span class="pre">del_employee</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DS.html#Core.del_employee"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DS.Core.del_employee" title="Permalink to this definition">¶</a></dt>
+<dd><p>return 3 if There is no such a username</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DS.Core.funds_transfer">
+<span class="sig-name descname"><span class="pre">funds_transfer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sender</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">receiver</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DS.html#Core.funds_transfer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DS.Core.funds_transfer" title="Permalink to this definition">¶</a></dt>
+<dd><p>funds_transfer(sender=account number of sender,
+receiver=account number of receiver,amount=integer)
+return 1 if amount bigger than balance
+return 7 if amount is bigger or equal to 0</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DS.Core.get_account_numbers">
+<span class="sig-name descname"><span class="pre">get_account_numbers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DS.html#Core.get_account_numbers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DS.Core.get_account_numbers" title="Permalink to this definition">¶</a></dt>
+<dd><p>return accounts number</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DS.Core.get_balance">
+<span class="sig-name descname"><span class="pre">get_balance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">account_num</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DS.html#Core.get_balance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DS.Core.get_balance" title="Permalink to this definition">¶</a></dt>
+<dd><p>return balance if account exists
+else return 2 There is no such a account</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DS.Core.get_branch_employees">
+<span class="sig-name descname"><span class="pre">get_branch_employees</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">branch_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DS.html#Core.get_branch_employees"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DS.Core.get_branch_employees" title="Permalink to this definition">¶</a></dt>
+<dd><p>return 6 if there is no such a branch
+else return branch employees</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DS.Core.search_account">
+<span class="sig-name descname"><span class="pre">search_account</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">account_num</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DS.html#Core.search_account"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DS.Core.search_account" title="Permalink to this definition">¶</a></dt>
+<dd><p>return object if account exists
+else 2 (there is no such a account number)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DS.Core.search_user">
+<span class="sig-name descname"><span class="pre">search_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">username=string</span></em>, <em class="sig-param"><span class="pre">types=(customers</span></em>, <em class="sig-param"><span class="pre">branches</span></em>, <em class="sig-param"><span class="pre">employees</span></em>, <em class="sig-param"><span class="pre">managers</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DS.html#Core.search_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DS.Core.search_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>only_with_types=True if only search with type)
+return an object if exist else return 3</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DS.Core.set_admin">
+<span class="sig-name descname"><span class="pre">set_admin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DS.html#Core.set_admin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DS.Core.set_admin" title="Permalink to this definition">¶</a></dt>
+<dd><p>set_admin also can be used for change password or username</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DS.Core.set_branch_manager">
+<span class="sig-name descname"><span class="pre">set_branch_manager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">branch_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DS.html#Core.set_branch_manager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DS.Core.set_branch_manager" title="Permalink to this definition">¶</a></dt>
+<dd><p>set_branch_manager(branch_name=must be in users[branch],
+username=must be in users[managers])
+return 6 if there is no such a branch
+return 3 if there is no such a username</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DS.Core.user_detail_change">
+<span class="sig-name descname"><span class="pre">user_detail_change</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">types</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DS.html#Core.user_detail_change"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DS.Core.user_detail_change" title="Permalink to this definition">¶</a></dt>
+<dd><p>User(first_name=string,last_name=string,
+ID=string,address=string,password=string)
+Manager(salary=integer)
+employee(salary=integer)
+admin(password=string)
+branch(address)</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Welcome to bank-3992’s documentation!</a></li>
+<li><a class="reference internal" href="#module-DSModels">DS models</a></li>
+<li><a class="reference internal" href="#module-DS">DS Core</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="DS.html"
+                        title="next chapter">DS</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="DS.html" title="DS"
+             >next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">bank-3992 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Welcome to bank-3992’s documentation!</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, MAS.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.1.
+    </div>
+  </body>
+</html>

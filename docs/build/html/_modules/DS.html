@@ -1,0 +1,500 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DS &#8212; bank-3992 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for DS</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">in This Module we define an api for the main.py</span>
+<span class="sd">methods in Core object must be able to do anything we need the backend do</span>
+<span class="sd">other classes, functions or constants can be defined for internal use.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">DSModels</span> <span class="kn">import</span> <span class="n">Account</span><span class="p">,</span> <span class="n">Customer</span><span class="p">,</span> <span class="n">Branch</span><span class="p">,</span> <span class="n">Employee</span><span class="p">,</span> <span class="n">Manager</span><span class="p">,</span> <span class="n">Admin</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+
+<span class="n">dict_error</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;There is not enough money in your account&quot;</span><span class="p">,</span>
+    <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;There is no such a account number &quot;</span><span class="p">,</span>
+    <span class="mi">3</span><span class="p">:</span> <span class="s2">&quot;There is no such a username &quot;</span><span class="p">,</span>
+    <span class="mi">4</span><span class="p">:</span> <span class="s2">&quot;The username  already exists&quot;</span><span class="p">,</span>
+    <span class="mi">5</span><span class="p">:</span> <span class="s2">&quot;Password is wrong&quot;</span><span class="p">,</span>
+    <span class="mi">6</span><span class="p">:</span> <span class="s2">&quot;There is no such a branch&quot;</span><span class="p">,</span>
+    <span class="mi">7</span><span class="p">:</span> <span class="s2">&quot;number is smaller or equal to 0&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="Core"><a class="viewcode-back" href="../index.html#DS.Core">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Core</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Core part of DS</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">__default_admin</span> <span class="o">=</span> <span class="n">Admin</span><span class="p">(</span><span class="s2">&quot;admin&quot;</span><span class="p">,</span> <span class="s2">&quot;admin&quot;</span><span class="p">)</span>
+    <span class="n">__users</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;customers&quot;</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="s2">&quot;employees&quot;</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="s2">&quot;accounts&quot;</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="s2">&quot;branches&quot;</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="s2">&quot;admin&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;admin&quot;</span><span class="p">:</span> <span class="n">__default_admin</span><span class="p">},</span>
+        <span class="s2">&quot;managers&quot;</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="p">}</span>
+    <span class="c1"># ============================admin part=================================</span>
+
+<div class="viewcode-block" id="Core.set_admin"><a class="viewcode-back" href="../index.html#DS.Core.set_admin">[docs]</a>    <span class="k">def</span> <span class="nf">set_admin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;set_admin also can be used for change password or username&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="s2">&quot;admin&quot;</span><span class="p">][</span><span class="n">username</span><span class="p">]</span> <span class="o">=</span> <span class="n">Admin</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span></div>
+
+    <span class="c1"># ===========================global part=================================</span>
+
+<div class="viewcode-block" id="Core.check_login"><a class="viewcode-back" href="../index.html#DS.Core.check_login">[docs]</a>    <span class="k">def</span> <span class="nf">check_login</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">types</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        check_login(username=string,password=string,</span>
+<span class="sd">        type=(customers,empolyees,managers,admin))</span>
+<span class="sd">        return object if exists</span>
+<span class="sd">        else return 3 (There is no such a username)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="n">types</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">username</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">user</span> <span class="ow">and</span> <span class="p">(</span><span class="n">password</span> <span class="o">==</span> <span class="n">user</span><span class="o">.</span><span class="n">password</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">user</span>
+        <span class="k">return</span> <span class="mi">3</span>  <span class="c1"># There is no such a username</span></div>
+
+<div class="viewcode-block" id="Core.change_username"><a class="viewcode-back" href="../index.html#DS.Core.change_username">[docs]</a>    <span class="k">def</span> <span class="nf">change_username</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">old_username</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">new_username</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">types</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        change_username(old_username=string,new_username=string,</span>
+<span class="sd">        types=(customers,branches,employees,managers,admin))</span>
+<span class="sd">        return 4 if username already exists</span>
+<span class="sd">        return 3 if There is no such a username</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">users</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="n">types</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">new_username</span> <span class="ow">in</span> <span class="n">users</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">4</span>  <span class="c1"># username already exists</span>
+        <span class="k">if</span> <span class="n">old_username</span> <span class="ow">in</span> <span class="n">users</span><span class="p">:</span>
+            <span class="n">users</span><span class="p">[</span><span class="n">new_username</span><span class="p">]</span> <span class="o">=</span> <span class="n">users</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">old_username</span><span class="p">)</span>
+            <span class="n">user</span> <span class="o">=</span> <span class="n">users</span><span class="p">[</span><span class="n">new_username</span><span class="p">]</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="n">new_username</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">types</span> <span class="o">==</span> <span class="s2">&quot;customers&quot;</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">account</span> <span class="ow">in</span> <span class="n">user</span><span class="o">.</span><span class="n">accounts</span><span class="p">:</span>
+                    <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="s2">&quot;accounts&quot;</span><span class="p">]</span>
+                            <span class="p">[</span><span class="n">account</span><span class="p">],</span> <span class="s2">&quot;owner&quot;</span><span class="p">,</span> <span class="n">new_username</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">types</span> <span class="o">==</span> <span class="s2">&quot;branches&quot;</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">employee</span> <span class="ow">in</span> <span class="n">user</span><span class="o">.</span><span class="n">employees</span><span class="p">:</span>
+                    <span class="n">employee</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="s2">&quot;employees&quot;</span><span class="p">][</span><span class="n">employee</span><span class="p">]</span>
+                    <span class="nb">setattr</span><span class="p">(</span><span class="n">employee</span><span class="p">,</span> <span class="s2">&quot;branch&quot;</span><span class="p">,</span> <span class="n">new_username</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">3</span>  <span class="c1"># There is no such a username</span></div>
+
+<div class="viewcode-block" id="Core.change_password"><a class="viewcode-back" href="../index.html#DS.Core.change_password">[docs]</a>    <span class="k">def</span> <span class="nf">change_password</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">old_password</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">new_password</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">types</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        change_password(username=string,old_paasword=string,new_password=str,</span>
+<span class="sd">        types=(customers,employees,managers,admin))</span>
+<span class="sd">        return 5 if password is wrong</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="n">types</span><span class="p">][</span><span class="n">username</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">old_password</span> <span class="o">==</span> <span class="n">user</span><span class="o">.</span><span class="n">password</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">,</span> <span class="n">new_password</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">5</span>  <span class="c1"># password is wrong</span></div>
+
+<div class="viewcode-block" id="Core.search_user"><a class="viewcode-back" href="../index.html#DS.Core.search_user">[docs]</a>    <span class="k">def</span> <span class="nf">search_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">types</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">only_with_types</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        search_user(username=string,types=(customers,branches,employees,managers)</span>
+<span class="sd">        only_with_types=True if only search with type)</span>
+<span class="sd">        return an object if exist else return 3&quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">types</span><span class="p">):</span>
+            <span class="n">user_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">types</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">user_</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">only_with_types</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">:</span>
+                <span class="n">user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="n">group</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">username</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">user</span><span class="p">:</span>
+                    <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span> <span class="k">if</span> <span class="n">result</span> <span class="k">else</span> <span class="mi">3</span>  <span class="c1"># thereis no such a username</span></div>
+
+<div class="viewcode-block" id="Core.user_detail_change"><a class="viewcode-back" href="../index.html#DS.Core.user_detail_change">[docs]</a>    <span class="k">def</span> <span class="nf">user_detail_change</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">types</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        User(first_name=string,last_name=string,</span>
+<span class="sd">        ID=string,address=string,password=string)</span>
+<span class="sd">        Manager(salary=integer)</span>
+<span class="sd">        employee(salary=integer)</span>
+<span class="sd">        admin(password=string)</span>
+<span class="sd">        branch(address)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_user</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">types</span><span class="p">,</span> <span class="n">only_with_types</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">user</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">3</span>  <span class="c1"># there is no such a username</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+                <span class="nb">setattr</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></div>
+
+    <span class="c1"># ==========================account part================================</span>
+
+<div class="viewcode-block" id="Core.create_account"><a class="viewcode-back" href="../index.html#DS.Core.create_account">[docs]</a>    <span class="k">def</span> <span class="nf">create_account</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">amount</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        create_account(self,username=string and must be in users[customers],</span>
+<span class="sd">        amount=default 0)</span>
+<span class="sd">        get username and return integer(account_number)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">accounts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="s2">&quot;accounts&quot;</span><span class="p">]</span>
+        <span class="n">customers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="s2">&quot;customers&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">username</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">customers</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">3</span>  <span class="c1"># There is no such a username</span>
+
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">account_num</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="mi">16</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="mi">17</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">account_num</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">accounts</span><span class="p">:</span>
+                <span class="c1"># add to accounts attribute in customer class</span>
+                <span class="n">customers</span><span class="p">[</span><span class="n">username</span><span class="p">]</span><span class="o">.</span><span class="n">add_account</span><span class="p">(</span><span class="n">account_num</span><span class="p">)</span>
+                <span class="c1"># save account object in users[accounts]</span>
+                <span class="n">accounts</span><span class="p">[</span><span class="n">account_num</span><span class="p">]</span> <span class="o">=</span> <span class="n">Account</span><span class="p">(</span>
+                    <span class="n">balance</span><span class="o">=</span><span class="n">amount</span><span class="p">,</span> <span class="n">account_number</span><span class="o">=</span><span class="n">account_num</span><span class="p">,</span> <span class="n">owner</span><span class="o">=</span><span class="n">username</span>
+                <span class="p">)</span>
+                <span class="k">return</span> <span class="n">account_num</span></div>
+
+    <span class="k">def</span> <span class="nf">deposit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">account_num</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="s2">&quot;accounts&quot;</span><span class="p">][</span><span class="n">account_num</span><span class="p">]</span><span class="o">.</span><span class="n">deposit</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Core.get_balance"><a class="viewcode-back" href="../index.html#DS.Core.get_balance">[docs]</a>    <span class="k">def</span> <span class="nf">get_balance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">account_num</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;return balance if account exists</span>
+<span class="sd">        else return 2 There is no such a account&quot;&quot;&quot;</span>
+        <span class="n">account</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="s2">&quot;accounts&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">account_num</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">account</span><span class="o">.</span><span class="n">show_balance</span><span class="p">()</span> <span class="k">if</span> <span class="n">account</span> <span class="k">else</span> <span class="mi">2</span></div>
+
+    <span class="k">def</span> <span class="nf">withdraw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">account_num</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="s2">&quot;accounts&quot;</span><span class="p">][</span><span class="n">account_num</span><span class="p">]</span><span class="o">.</span><span class="n">withdraw</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Core.funds_transfer"><a class="viewcode-back" href="../index.html#DS.Core.funds_transfer">[docs]</a>    <span class="k">def</span> <span class="nf">funds_transfer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sender</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">receiver</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        funds_transfer(sender=account number of sender,</span>
+<span class="sd">        receiver=account number of receiver,amount=integer)</span>
+<span class="sd">        return 1 if amount bigger than balance</span>
+<span class="sd">        return 7 if amount is bigger or equal to 0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">accounts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="s2">&quot;accounts&quot;</span><span class="p">]</span>
+        <span class="n">send</span> <span class="o">=</span> <span class="n">accounts</span><span class="p">[</span><span class="n">sender</span><span class="p">]</span><span class="o">.</span><span class="n">fund_transfer</span><span class="p">(</span>
+            <span class="n">amount</span><span class="o">=</span><span class="n">amount</span><span class="p">,</span> <span class="n">account_num</span><span class="o">=</span><span class="n">receiver</span><span class="p">,</span> <span class="n">types</span><span class="o">=</span><span class="s2">&quot;transfer_withdraw&quot;</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">send</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">send</span>
+        <span class="n">receive</span> <span class="o">=</span> <span class="n">accounts</span><span class="p">[</span><span class="n">receiver</span><span class="p">]</span><span class="o">.</span><span class="n">fund_transfer</span><span class="p">(</span>
+            <span class="n">amount</span><span class="o">=</span><span class="n">amount</span><span class="p">,</span> <span class="n">account_num</span><span class="o">=</span><span class="n">sender</span><span class="p">,</span> <span class="n">types</span><span class="o">=</span><span class="s2">&quot;transfer_deposit&quot;</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">receive</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">receive</span></div>
+
+<div class="viewcode-block" id="Core.account_history"><a class="viewcode-back" href="../index.html#DS.Core.account_history">[docs]</a>    <span class="k">def</span> <span class="nf">account_history</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">account_num</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">types</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        transfer_history(account_number=integer,types=(withdraw,deposit,fund_transfer))</span>
+<span class="sd">        return all history if not specified else return specified history</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">account</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="s2">&quot;accounts&quot;</span><span class="p">][</span><span class="n">account_num</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">account</span><span class="o">.</span><span class="n">get_history</span><span class="p">(</span><span class="n">types</span><span class="o">=</span><span class="n">types</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Core.get_account_numbers"><a class="viewcode-back" href="../index.html#DS.Core.get_account_numbers">[docs]</a>    <span class="k">def</span> <span class="nf">get_account_numbers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; return accounts number&quot;&quot;&quot;</span>
+        <span class="n">accounts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="s2">&quot;customers&quot;</span><span class="p">][</span><span class="n">username</span><span class="p">]</span><span class="o">.</span><span class="n">accounts</span>
+        <span class="k">return</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span> <span class="n">accounts</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Core.all_accounts"><a class="viewcode-back" href="../index.html#DS.Core.all_accounts">[docs]</a>    <span class="k">def</span> <span class="nf">all_accounts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;return accounts obj&quot;&quot;&quot;</span>
+        <span class="n">accounts_num</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_account_numbers</span><span class="p">(</span><span class="n">username</span><span class="p">)</span>
+        <span class="n">accounts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="s2">&quot;accounts&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">accounts</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">accounts_num</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">del_account</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">account_num</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="n">account</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="s2">&quot;accounts&quot;</span><span class="p">][</span><span class="n">account_num</span><span class="p">]</span>
+        <span class="n">customers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="s2">&quot;customers&quot;</span><span class="p">]</span>
+        <span class="n">customers</span><span class="p">[</span><span class="n">account</span><span class="o">.</span><span class="n">owner</span><span class="p">]</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">account_num</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">account</span>
+
+<div class="viewcode-block" id="Core.search_account"><a class="viewcode-back" href="../index.html#DS.Core.search_account">[docs]</a>    <span class="k">def</span> <span class="nf">search_account</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">account_num</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;return object if account exists</span>
+<span class="sd">        else 2 (there is no such a account number)&quot;&quot;&quot;</span>
+        <span class="n">account</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="s2">&quot;accounts&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">account_num</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">account</span></div>
+
+    <span class="c1"># =========================customer part===============================</span>
+
+<div class="viewcode-block" id="Core.customer_history"><a class="viewcode-back" href="../index.html#DS.Core.customer_history">[docs]</a>    <span class="k">def</span> <span class="nf">customer_history</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">types</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;return histoy if username exists</span>
+<span class="sd">        else 3 (there is no such a user name )&quot;&quot;&quot;</span>
+        <span class="n">customer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="s2">&quot;customers&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">username</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">customer</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">customer</span><span class="o">.</span><span class="n">get_history</span><span class="p">(</span><span class="n">types</span><span class="o">=</span><span class="n">types</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">3</span>  <span class="c1"># there is no such a username</span></div>
+
+<div class="viewcode-block" id="Core.create_customer"><a class="viewcode-back" href="../index.html#DS.Core.create_customer">[docs]</a>    <span class="k">def</span> <span class="nf">create_customer</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">first_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">last_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">password</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">ID</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">address</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        return 4 if username exists</span>
+<span class="sd">        else return object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">var</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;self&quot;</span><span class="p">)</span>
+        <span class="n">customers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="s2">&quot;customers&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">username</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">customers</span><span class="p">:</span>
+            <span class="n">customer</span> <span class="o">=</span> <span class="n">Customer</span><span class="p">(</span><span class="o">**</span><span class="n">var</span><span class="p">)</span>
+            <span class="n">customers</span><span class="p">[</span><span class="n">username</span><span class="p">]</span> <span class="o">=</span> <span class="n">customer</span>
+            <span class="k">return</span> <span class="n">customer</span>
+        <span class="k">return</span> <span class="mi">4</span>  <span class="c1"># the username is already exists</span></div>
+
+    <span class="k">def</span> <span class="nf">get_all_customers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">customers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="s2">&quot;customers&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span> <span class="n">customers</span><span class="p">)</span>
+
+    <span class="c1"># ==========================manager part===============================</span>
+<div class="viewcode-block" id="Core.create_manager"><a class="viewcode-back" href="../index.html#DS.Core.create_manager">[docs]</a>    <span class="k">def</span> <span class="nf">create_manager</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">first_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">last_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">password</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">ID</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">address</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">salary</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        return object if already not exists</span>
+<span class="sd">        else return 4(username already exists)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">var</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;self&quot;</span><span class="p">)</span>
+        <span class="n">managers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="s2">&quot;managers&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">username</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">managers</span><span class="p">:</span>
+            <span class="n">manager</span> <span class="o">=</span> <span class="n">Manager</span><span class="p">(</span><span class="o">**</span><span class="n">var</span><span class="p">)</span>
+            <span class="n">managers</span><span class="p">[</span><span class="n">username</span><span class="p">]</span> <span class="o">=</span> <span class="n">manager</span>
+            <span class="k">return</span> <span class="n">manager</span>
+        <span class="k">return</span> <span class="mi">4</span>  <span class="c1"># username laready exists</span></div>
+
+    <span class="k">def</span> <span class="nf">get_all_managers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">managers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="s2">&quot;managers&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span> <span class="n">managers</span><span class="p">)</span>
+
+    <span class="c1"># ==========================employee part==============================</span>
+    <span class="k">def</span> <span class="nf">get_all_employees</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">employees</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="s2">&quot;employees&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span> <span class="n">employees</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Core.create_employee"><a class="viewcode-back" href="../index.html#DS.Core.create_employee">[docs]</a>    <span class="k">def</span> <span class="nf">create_employee</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">first_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">last_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">password</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">ID</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">address</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">salary</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        return 4 if username already exists</span>
+<span class="sd">        else return employee obj</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">var</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;self&quot;</span><span class="p">)</span>
+        <span class="n">employees</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="s2">&quot;employees&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">username</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">employees</span><span class="p">:</span>
+            <span class="n">employee</span> <span class="o">=</span> <span class="n">Employee</span><span class="p">(</span><span class="o">**</span><span class="n">var</span><span class="p">)</span>
+            <span class="n">employees</span><span class="p">[</span><span class="n">username</span><span class="p">]</span> <span class="o">=</span> <span class="n">employee</span>
+            <span class="k">return</span> <span class="n">employee</span>
+        <span class="k">return</span> <span class="mi">4</span>  <span class="c1"># username already exists</span></div>
+
+<div class="viewcode-block" id="Core.del_employee"><a class="viewcode-back" href="../index.html#DS.Core.del_employee">[docs]</a>    <span class="k">def</span> <span class="nf">del_employee</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;return 3 if There is no such a username&quot;&quot;&quot;</span>
+        <span class="n">employee</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="s2">&quot;employees&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">username</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">employee</span><span class="p">:</span>
+            <span class="n">branch</span> <span class="o">=</span> <span class="n">employee</span><span class="o">.</span><span class="n">branch</span>
+            <span class="k">if</span> <span class="n">branch</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">del_branch_employee</span><span class="p">(</span><span class="n">branch</span><span class="p">,</span> <span class="n">username</span><span class="p">)</span>
+            <span class="k">del</span> <span class="n">employee</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">3</span>  <span class="c1"># there is no such a username</span></div>
+
+    <span class="c1"># ==========================branch part===============================</span>
+<div class="viewcode-block" id="Core.create_branch"><a class="viewcode-back" href="../index.html#DS.Core.create_branch">[docs]</a>    <span class="k">def</span> <span class="nf">create_branch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">address</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        return 4 if username already exists</span>
+<span class="sd">        else return object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">var</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">()</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;self&quot;</span><span class="p">)</span>
+        <span class="n">branches</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="s2">&quot;branches&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">branches</span><span class="p">:</span>
+            <span class="n">branch</span> <span class="o">=</span> <span class="n">Branch</span><span class="p">(</span><span class="o">**</span><span class="n">var</span><span class="p">)</span>
+            <span class="n">branches</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">branch</span>
+            <span class="k">return</span> <span class="n">branch</span>
+        <span class="k">return</span> <span class="mi">4</span>  <span class="c1"># username already exists</span></div>
+
+    <span class="k">def</span> <span class="nf">del_branch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">branch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="s2">&quot;branches&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">username</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">branch</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">branch</span><span class="o">.</span><span class="n">employees</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">user_detail_change</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s2">&quot;employees&quot;</span><span class="p">,</span> <span class="n">branch</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="s2">&quot;branches&quot;</span><span class="p">][</span><span class="n">username</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">3</span>  <span class="c1"># there is no such a username</span>
+
+<div class="viewcode-block" id="Core.add_branch_employee"><a class="viewcode-back" href="../index.html#DS.Core.add_branch_employee">[docs]</a>    <span class="k">def</span> <span class="nf">add_branch_employee</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">branch_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        add_branch_employee(branch_name=string,</span>
+<span class="sd">        username=must be in users[employees])</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">branch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="s2">&quot;branches&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">branch_name</span><span class="p">)</span>
+        <span class="n">employee</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="s2">&quot;employees&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">username</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">branch</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">6</span>  <span class="c1"># there is no such a branch</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">employee</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">3</span>  <span class="c1"># there is no such a username</span>
+        <span class="n">branch</span><span class="o">.</span><span class="n">employees</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">username</span><span class="p">)</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">employee</span><span class="p">,</span> <span class="s2">&quot;branch&quot;</span><span class="p">,</span> <span class="n">branch_name</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Core.del_branch_employee"><a class="viewcode-back" href="../index.html#DS.Core.del_branch_employee">[docs]</a>    <span class="k">def</span> <span class="nf">del_branch_employee</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">branch_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        return 6 if there is no such a branch</span>
+<span class="sd">        return 3 if there is no such a username</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">branch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="s2">&quot;branches&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">branch_name</span><span class="p">)</span>
+        <span class="n">employee</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="s2">&quot;employees&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">username</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">branch</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">6</span>  <span class="c1"># there is no such a branch</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">employee</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">3</span>  <span class="c1"># there is no such a username</span>
+        <span class="n">employees</span> <span class="o">=</span> <span class="n">branch</span><span class="o">.</span><span class="n">employees</span>
+        <span class="k">if</span> <span class="n">username</span> <span class="ow">in</span> <span class="n">employees</span><span class="p">:</span>
+            <span class="n">employees</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">username</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Core.get_branch_employees"><a class="viewcode-back" href="../index.html#DS.Core.get_branch_employees">[docs]</a>    <span class="k">def</span> <span class="nf">get_branch_employees</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">branch_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        return 6 if there is no such a branch</span>
+<span class="sd">        else return branch employees&quot;&quot;&quot;</span>
+        <span class="n">branch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="s2">&quot;branches&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">branch_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">branch</span><span class="p">:</span>
+            <span class="n">employees</span> <span class="o">=</span> <span class="n">branch</span><span class="o">.</span><span class="n">employees</span>
+            <span class="k">return</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span> <span class="n">employees</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">6</span>  <span class="c1"># there is no such a branch</span></div>
+
+<div class="viewcode-block" id="Core.set_branch_manager"><a class="viewcode-back" href="../index.html#DS.Core.set_branch_manager">[docs]</a>    <span class="k">def</span> <span class="nf">set_branch_manager</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">branch_name</span><span class="p">,</span> <span class="n">username</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;set_branch_manager(branch_name=must be in users[branch],</span>
+<span class="sd">        username=must be in users[managers])</span>
+<span class="sd">        return 6 if there is no such a branch</span>
+<span class="sd">        return 3 if there is no such a username&quot;&quot;&quot;</span>
+        <span class="n">branches</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="s2">&quot;branches&quot;</span><span class="p">]</span>
+        <span class="n">manager</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="s2">&quot;managers&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">username</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">branch_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">branches</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">6</span>  <span class="c1"># there is no such a branch</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">manager</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">3</span>  <span class="c1"># there is no such a username</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">branches</span><span class="p">[</span><span class="n">branch_name</span><span class="p">],</span> <span class="s2">&quot;manager&quot;</span><span class="p">,</span> <span class="n">username</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">get_all_branches</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">branches</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__users</span><span class="p">[</span><span class="s2">&quot;branches&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span> <span class="n">branches</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">bank-3992</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../DS.html">DS</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, MAS.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
